@@ -1,0 +1,18 @@
+# install via pip package manager
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python27 get-pip.py
+sudo pip install awscli
+
+# *** install via bundler ***
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+# config & credentials
+[snssys]
+output = text
+region = us-east-1
+
+[snssys]
+aws_access_key_id = AKIAIYCNGCYJY7DLKH4A
+aws_secret_access_key = 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

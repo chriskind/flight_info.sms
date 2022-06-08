@@ -1,0 +1,7 @@
+name = Flightinfo SMS
+description = SMS Messaging Support
+package = Flightinfo
+core = 7.x
+version = "7.x-1.0"
+files[] = includes/flightinfoSMS.inc
+configure = admin/config/flightinfo/sms

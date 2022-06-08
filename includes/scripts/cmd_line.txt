@@ -1,0 +1,4 @@
+/home/bitnami/__protected_scripts/aws_sms.sh -p "+14045148512" -s "SCHEDULE UPDATE FOR:" -m "Ernesto Cortissoz International Airport (SKBQ)\""
+/home/bitnami/__protected_scripts/which 
+
+./aws_sms.sh -p "+16786991683" -s "SCHEDULE UPDATE FOR:" -m "Ernesto Cortissoz International Airport (SKBQ)"

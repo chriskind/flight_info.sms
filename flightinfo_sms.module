@@ -1,0 +1,120 @@
+<?php
+
+function flightinfo_sms_node_view($node, $view_mode, $langcode) {
+  if($node->title == 'smsTest') {
+    $flightinfoSMS = new flightinfoSMS();
+    $sms = $flightinfoSMS->test_sms();
+    foreach($sms as $message) {
+      dsm($message);
+    }
+  }
+}
+
+function flightinfo_send_sms($phone_num, $subject, $message, $auth_info = NULL, $test = NULL) {
+  $flightinfoSMS = new flightinfoSMS();
+  $sms = $flightinfoSMS->send_sms($phone_num, $subject, $message, $auth_info, $test);
+  
+  /*
+  foreach($sms as $message) {
+    dsm($message);
+  }
+  */
+}
+
+
+
+function flightinfo_sms_admin_form($form, &$form_state) {
+  $form = array();
+  
+  /*
+  $form['SMS_Auth_Username'] = array(
+      '#type' => 'textfield', 
+      '#title' => t('SMS Service Username'), 
+      '#default_value' => variable_get('SMS_Auth_Username', NULL), 
+      '#size' => 15, 
+      '#maxlength' => 25, 
+      '#description' => t("Username for SMS Service"), 
+      '#required' => FALSE
+  );
+  
+  $form['SMS_Auth_Password'] = array(
+      '#type' => 'textfield', 
+      '#title' => t('SMS Service Password'), 
+      '#default_value' => variable_get('SMS_Auth_Password', NULL), 
+      '#size' => 15, 
+      '#maxlength' => 25, 
+      '#description' => t("Username for SMS Service"), 
+      '#required' => FALSE
+  );
+  */
+  
+  $form['SMS_Test_Phone'] = array(
+      '#type' => 'textfield', 
+      '#title' => t('Test Phone Number'), 
+      '#default_value' => variable_get('SMS_Test_Phone', NULL), 
+      '#size' => 15, 
+      '#maxlength' => 25, 
+      '#description' => t("A test phone number for SMS testing"), 
+      '#required' => FALSE
+  );
+ 
+  $form['SMS_Test_Mode'] = array(
+      '#type' => 'select', 
+      '#title' => t('Test Mode'),
+      '#options' => array(
+         0 => t('No'),
+         1 => t('Yes'),
+       ),
+      '#default_value' => variable_get('SMS_Test_Mode', 1), 
+      '#description' => t("Turn on test mode to send all messages to test phone number"), 
+  );
+  
+  $form['SMS_Enabled'] = array(
+      '#type' => 'select', 
+      '#title' => t('SMS Enabled'),
+      '#options' => array(
+         0 => t('No'),
+         1 => t('Yes'),
+       ),
+      '#default_value' => variable_get('SMS_Enabled', 0), 
+      '#description' => t("Completely Disable SMS sending"), 
+  );
+  
+  $form['SMS_Script_Path'] = array(
+      '#type' => 'textfield', 
+      '#title' => t('Path to Call AWS Script'), 
+      '#default_value' => variable_get('SMS_Script_Path', NULL), 
+      '#size' => 100, 
+      '#maxlength' => 100, 
+      '#description' => t("A test phone number for SMS testing"), 
+      '#required' => FALSE
+  );
+  
+  $form['SMS_Test_Now'] = array(
+    '#markup' => '<p><a href="/page/smsTest">TEST SMS CONNECTION NOW</a></p>'
+  );
+  
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function flightinfo_sms_menu() {
+  $items = array();
+  
+  $items['admin/config/flightinfo/sms'] = array(
+      'title' => 'Flightinfo SMS settings', 
+      'description' => 'Configuration for Bulk text messgages', 
+      'page callback' => 'drupal_get_form', 
+      'page arguments' => array(
+          'flightinfo_sms_admin_form'
+      ), 
+      'access arguments' => array(
+          'access administration pages'
+      ), 
+      'type' => MENU_NORMAL_ITEM
+  );
+  
+  return $items;
+}
