@@ -26,28 +26,6 @@ function flightinfo_send_sms($phone_num, $subject, $message, $auth_info = NULL, 
 function flightinfo_sms_admin_form($form, &$form_state) {
   $form = array();
   
-  /*
-  $form['SMS_Auth_Username'] = array(
-      '#type' => 'textfield', 
-      '#title' => t('SMS Service Username'), 
-      '#default_value' => variable_get('SMS_Auth_Username', NULL), 
-      '#size' => 15, 
-      '#maxlength' => 25, 
-      '#description' => t("Username for SMS Service"), 
-      '#required' => FALSE
-  );
-  
-  $form['SMS_Auth_Password'] = array(
-      '#type' => 'textfield', 
-      '#title' => t('SMS Service Password'), 
-      '#default_value' => variable_get('SMS_Auth_Password', NULL), 
-      '#size' => 15, 
-      '#maxlength' => 25, 
-      '#description' => t("Username for SMS Service"), 
-      '#required' => FALSE
-  );
-  */
-  
   $form['SMS_Test_Phone'] = array(
       '#type' => 'textfield', 
       '#title' => t('Test Phone Number'), 
